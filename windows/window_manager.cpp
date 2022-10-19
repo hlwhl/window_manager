@@ -824,16 +824,18 @@ void WindowManager::StartDragging() {
 void WindowManager::SetAlwaysShow(const flutter::EncodableMap& args) {
   bool isShow =
       std::get<bool>(args.at(flutter::EncodableValue("isAlwaysShow")));
+
+  is_frameless_ = isShow;
   
   if (isShow)
   {
     SetWindowPos(GetMainWindow(), HWND_TOPMOST,
-               0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+               0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
   } 
   else
   {
     SetWindowPos(GetMainWindow(), HWND_NOTOPMOST,
-               0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+               0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
   }
 
    HWND hWnd = GetMainWindow();
