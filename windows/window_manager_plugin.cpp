@@ -269,6 +269,7 @@ std::optional<LRESULT> WindowManagerPlugin::HandleWindowProc(HWND hWnd,
       rect->bottom = bottom;
     }
   } else if (message == WM_SIZE) {
+    _EmitEvent("resized");
     LONG_PTR gwlStyle =
         GetWindowLongPtr(window_manager->GetMainWindow(), GWL_STYLE);
     if ((gwlStyle & (WS_CAPTION | WS_THICKFRAME)) == 0 &&
